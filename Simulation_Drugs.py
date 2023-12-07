@@ -26,7 +26,7 @@ def model(x, t, mu_c, mu_p, gamma_p, gamma_c, k_t):
 # Initial conditions
 x0 = [10,100,0.5,300]
 
-# parametres du systeme de louzoun et al
+# pParameters of the system
 C0=10**6
 P0=10**5
 k_c=0.075
@@ -77,21 +77,28 @@ for i, ax in enumerate(axs.flatten()):
 plt.tight_layout()
 plt.show()
 
-print(TGF_beta.shape)
+#Plotting graph for lambda_c = 1e-7 with all 4 solutions of the model
+lambda_c = 1e-7
+plt.figure()
+plt.clf()
 
-
-# Solving the EDO system
-EGFR = spi.odeint(model, x0, t, args=(mu_c*0.7, mu_p, gamma_p, gamma_c, k_t))
-TGF_beta_s = spi.odeint(model, x0, t, args=(mu_c, mu_p*0, gamma_p*0, gamma_c*0, k_t))
-both = spi.odeint(model, x0, t, args=(mu_c*0.7, mu_p*0, gamma_p*0, gamma_c*0, k_t))
-
-# Graph
-plt.plot(t, untreated[:, 0], label='Untreated patient')
-plt.plot(t, TGF_beta_s[:, 0], label='TGF_beta treatment')
-plt.plot(t, EGFR[:, 0], label='EGFR silencing')
-plt.plot(t, both[:, 0], label='Both')
-
-plt.xlabel('Time (s)')
-plt.ylabel('Cancer cells (C)')
-plt.legend()
+plt.subplot(221)
+plt.plot(t,untreated[:,0],'.-')
+plt.ylabel('PCC')
+plt.xlabel('t')
+plt.subplot(222)
+plt.plot(t,untreated[:,1])
+plt.ylabel('PsC')
+plt.xlabel('t')
+plt.subplot(223)
+plt.plot(t,untreated[:,2])
+plt.ylabel('R')
+plt.xlabel('t')
+plt.subplot(224)
+plt.plot(t,untreated[:,3])
+plt.ylabel('T') 
+plt.xlabel('t')
+    
+plt.legend('Untreatd')    
+plt.suptitle('lambda_c='+str(lambda_c))
 plt.show()

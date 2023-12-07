@@ -27,7 +27,7 @@ def model(x, t, mu_c, mu_p, gamma_p, gamma_c, k_t):
 # Initial conditions
 x0 = [10,100,0.5,300]
 
-# parametres du systeme de louzoun et al
+# pParameters of the system
 C0=10**6
 P0=10**5
 k_c=0.075
@@ -46,6 +46,7 @@ k_t=3300
 K_t=K_c
 lambda_t=0.3
 
+# Time vector
 t0 = 0
 T = 500
 pas = 0.001
@@ -54,6 +55,7 @@ t = np.arange(t0, T, pas)
 # Number of simulations
 num_simulations = 50
 
+# Store results
 untreated = []
 TGF_beta = []
 immune_act = []

@@ -26,7 +26,7 @@ def model(x, t, mu_c, mu_p, gamma_p, gamma_c, k_t):
 # Initial conditions
 x0 = [10,100,0.5,300]
 
-# parametres du systeme de louzoun et al
+# Parameters of the system
 C0=10**6
 P0=10**5
 k_c=0.075
@@ -45,6 +45,7 @@ k_t=3300
 K_t=K_c
 lambda_t=0.3
 
+# Time vector
 t0 = 0
 T = 300
 pas = 1
@@ -63,26 +64,19 @@ dCdt_values_article = []
 
 # Run the model for different values of lambda
 for lambda_c in lambda_values:
+    
     untreated = spi.odeint(model, x0, t, args=(mu_c, mu_p, gamma_p, gamma_c, k_t))
-    TGF_beta = spi.odeint(model, x0, t, args=(mu_c, 0.9*mu_p, 0.9*gamma_p, 0.9*gamma_c, k_t))
-    immune_act = spi.odeint(model, x0, t, args=(mu_c, mu_p, gamma_p, gamma_c, 2*k_t))
-    both = spi.odeint(model, x0, t, args=(mu_c, 0.9*mu_p, 0.9*gamma_p, 0.9*gamma_c, 2*k_t))
     article = spi.odeint(model, x0, t, args=(mu_c, mu_p, 0*gamma_p, 0*gamma_c, k_t))
+    
     dCdt_values_un.append(untreated[-1, 0])  # Store the value of dC/dt at the final time point
-    dCdt_values_TGF.append(TGF_beta[-1, 0])
-    dCdt_values_immune.append(immune_act[-1, 0])
-    dCdt_values_both.append(both[-1, 0])
     dCdt_values_article.append(article[-1, 0])
 
 # Plot the graph
-
 fig, ax = plt.subplots(figsize=(10, 6))
 
 ax.plot(lambda_values, dCdt_values_un, label = "Untreated")
 ax.plot(lambda_values, dCdt_values_article, label = "gama_p = gama_c = 0")
-#ax.plot(lambda_values, dCdt_values_TGF, label = "TGF_beta silencing")
-#ax.plot(lambda_values, dCdt_values_immune, label = "Immune activation")
-#ax.plot(lambda_values, dCdt_values_both, label = "Both")
+
 ax.set_xscale('log')
 ax.set_yscale('log')
 ax.set_xlabel('λc')
