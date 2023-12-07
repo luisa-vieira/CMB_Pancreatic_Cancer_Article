@@ -2,6 +2,7 @@
 
 This Mathematical Model for Pancreatic Cancer was developed for a Project of the Master of Computational and Mathematical Biology of the Aix-Marseill University.
 All equations and parameters are based on the article:
+
 Y. Louzoun, C. Xue, G. B. Lesinski, and A. Friedman. A mathematical model for
 pancreatic cancer growth and treatments. Journal of Theoretical Biology, 351:74â€“82,
 2014. ISSN 0022-5193. doi: https://doi.org/10.1016/j.jtbi.2014.02.028. URL https:
@@ -23,3 +24,5 @@ pancreatic cancer growth and treatments. Journal of Theoretical Biology, 351:74â
    It also plots the graph foe the bahavior of Cancer cells, Stale Pancreatic cells, Ratio of Macrophages and T-Cells over time for an untreated patient.
    
 3. Simulation_Mean_50_patients
+
+   This file simulates a population of 50 patients with different values of lambda_c. After the model runs for all those patients, the mean Cancer cells value (C) is calculated. Finally, the graph of Cancer Cells over time is plotted.
